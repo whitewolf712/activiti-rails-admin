@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ActivitiRailsAdmin</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container">
+  <!-- Static navbar -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="<%= root_path %>">Activiti Rails Admin</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <%= search_box %>
+      <%= profile_urls %>
+    </ul>
+  </nav>
+
+  <div>
+    <% flash.each do |key,value| %>
+        <%= content_tag(:div, value, class: "alert alert-#{key}", data: { dismiss: 'alert' }) %>
+    <% end %>
+    <%= yield %>
+  </div>
+</div>
+</body>
+</html>

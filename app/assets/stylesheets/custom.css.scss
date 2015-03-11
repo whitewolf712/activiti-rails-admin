@@ -1,0 +1,103 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$grayMediumLight: #656565;
+
+body {
+  padding-top: 70px;
+}
+
+/* Fields */
+input.search-proc-inst-by-id {
+  -moz-appearance:textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+
+/* navbar elements */
+.navbar-right {
+  padding-right: 30px;
+}
+
+.server-info-box {
+  padding: 10px;
+  line-height: 0.8;
+}
+
+/* panels */
+.panel {
+  .panel-heading {
+    cursor: default;
+  }
+
+  .panel-heading.cursor-pointer {
+    cursor: pointer;
+  }
+
+  span.notification-header:after {
+    font-family: 'Glyphicons Halflings';
+    content: "\e114";
+    float: right;
+    color: grey;
+  }
+
+  span.notification-header.collapsed:after {
+    content: "\e080";
+  }
+}
+
+/* typography */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+h1 {
+  font-size: 2.3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+h2 {
+  font-size: 1.7em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $grayMediumLight;
+}
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+
+/*flash*/
+.alert-error {
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48;
+  text-align: left;
+}
+
+.alert-alert {
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48;
+  text-align: left;
+}
+
+.alert-success {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #468847;
+  text-align: left;
+}
+
+.alert-notice {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #468847;
+  text-align: left;
+}

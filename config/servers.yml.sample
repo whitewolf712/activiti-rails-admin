@@ -1,0 +1,5 @@
+---
+- :name: Activiti production
+  :api_url: http://my-activiti-super-server:8080/activiti/rest/service/
+- :name: Localhost
+  :api_url: http://127.0.0.1:8080/activiti/rest/service/

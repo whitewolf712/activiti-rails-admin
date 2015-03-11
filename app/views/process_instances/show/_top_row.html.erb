@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-md-5">
+    <div class="panel panel-default">
+      <div class="panel-heading"><strong>Process info</strong></div>
+      <table class="table table-striped">
+        <tbody>
+        <tr>
+          <td>
+            <strong>Process Instance ID:</strong>
+          </td>
+          <td>
+            <%= @process_instance.id %>
+            <%= ended_label_xs_tag if @is_history %>
+          </td>
+        </tr>
+        <% unless @process_instance.businessKey.to_s.empty? %>
+            <tr>
+              <td>
+                <strong>Busines key:</strong>
+              </td>
+              <td>
+                <%= @process_instance.businessKey %>
+              </td>
+            </tr>
+        <% end %>
+        <% if @super_process_id %>
+            <tr>
+              <td><strong>Parent process:</strong></td>
+              <td>
+                <%= link_to @super_process_id, process_instance_path(id: @super_process_id) %>
+              </td>
+            </tr>
+        <% end %>
+        <tr>
+          <td><strong>Process Definition Id:</strong></td>
+          <td><%= @process_instance.processDefinitionId %></td>
+        </tr>
+        <% unless @is_history %>
+            <tr>
+              <td><strong>Process diagram:</strong></td>
+              <td><%= link_to 'Show', '#', class: 'fancybox', data: { url: diagram_box_process_instance_url } %></td>
+            </tr>
+        <% end %>
+        <tr>
+          <td><strong>Start Time:</strong></td>
+          <td>
+            <%= @start_time.localtime %>
+          </td>
+        </tr>
+        <% if @end_time %>
+            <tr>
+              <td><strong>End Time:</strong></td>
+              <td>
+                <%= @end_time.localtime %>
+              </td>
+            </tr>
+        <% end %>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading"><strong>Process actions</strong></div>
+      <div class="panel-body"><%= process_instance_delete_tag(@process_instance.id) unless @is_history %></div>
+    </div>
+  </div>
+</div>

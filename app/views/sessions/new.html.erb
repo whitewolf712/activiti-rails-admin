@@ -1,0 +1,10 @@
+<h1>Enter Activiti API credentials</h1>
+<div class="login-form">
+  <%= bootstrap_form_tag url: sessions_path, method: :post do |f| %>
+    <%= f.text_field :login %>
+    <%= f.password_field :password %>
+    <%= f.select :api_url, Rails.application.config.activiti_api_servers.collect { |e| [e[:name], e[:api_url]] },
+                 { label: 'Choose Activiti host:' }, { class: 'selectpicker' } %>
+        <%= f.submit 'Sign In', class: 'btn btn-primary' %>
+  <% end %>
+</div>
