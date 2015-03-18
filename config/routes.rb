@@ -4,7 +4,11 @@ Rails.application.routes.draw do
       get :search
     end
     member do
-      resources :process_variables, only: [:creat,:update,:delete], param: :name
+      resources :process_variables, only: [:update, :data], param: :name do
+        member do
+          get :data
+        end
+      end
       get :diagram
       get :diagram_box
     end

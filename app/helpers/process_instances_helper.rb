@@ -1,4 +1,16 @@
 module ProcessInstancesHelper
+  def variable_tag(process_instance, variable)
+    is_history = !!process_instance.endTime
+
+    return variable.value.to_s   if is_history
+    return variable_data_tag(process_instance.id, variable.name) if variable.type == 'serializable'
+    variable_edit_tag(process_instance.id, variable.name, variable.value)
+  end
+
+  def variable_data_tag(proc_inst_id, name)
+    link_to 'Get binary data', data_process_variable_path(id: proc_inst_id, name: name)
+  end
+
   def variable_edit_tag(proc_inst_id, name, value = nil)
     link_to value.to_s, '#',
             class: 'editable variable-editable',

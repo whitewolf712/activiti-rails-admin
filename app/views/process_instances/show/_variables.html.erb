@@ -23,7 +23,7 @@
                 <tr class="searchable_data">
                   <td><%= variable.name %></td>
                   <td><%= variable.type %></td>
-                  <td><%= @is_history ? variable.value : variable_edit_tag(@process_instance.id, variable.name, variable.value) %></td>
+                  <td><%= variable_tag @process_instance, variable %></td>
                 </tr>
             <% end %>
             </tbody>
