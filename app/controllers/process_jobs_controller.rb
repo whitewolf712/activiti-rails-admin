@@ -17,6 +17,8 @@ class ProcessJobsController < ApplicationController
       flash[:success] = 'Job execute successful.'
     rescue ActiveRestClient::HTTPServerException => e
       flash[:error] = 'Job execute failed. Internal server error. See exception message on job for details.' if e.status == 500
+    rescue ActiveRestClient::TimeoutException
+        flash[:error] = 'Job execution is timed out. You can refresh this page and recheck list of jobs little later.'
     ensure
       redirect_to :back
     end
