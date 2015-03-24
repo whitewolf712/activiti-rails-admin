@@ -17,7 +17,7 @@
             <% @sub_processes.each do |process| %>
                 <tr>
                   <td>
-                    <%= link_to process.id, process_instance_path(id: process.id) %>
+                    <%= link_to process.id, process_instance_path(id: process.id), data: { no_turbolink: true } %>
                     <%= ended_label_xs_tag if process.endTime %>
                   </td>
                   <td><%= process.businessKey.to_s %></td>
