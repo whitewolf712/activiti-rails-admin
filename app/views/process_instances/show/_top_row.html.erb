@@ -27,7 +27,7 @@
             <tr>
               <td><strong>Parent process:</strong></td>
               <td>
-                <%= link_to @super_process_id, process_instance_path(id: @super_process_id) %>
+                <%= link_to @super_process_id, process_instance_path(id: @super_process_id), data: { no_turbolink: true } %>
               </td>
             </tr>
         <% end %>
