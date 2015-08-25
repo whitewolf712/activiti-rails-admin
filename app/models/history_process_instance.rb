@@ -7,6 +7,7 @@ class HistoryProcessInstance < ActivitiAbstractModel
     method   = self.method(method_sym)
     result   = method.call method_options
     page     = paginate_options[:page] || 1
+    # TODO: remove hardcode
     per_page = 10
     total    = result.total || result.to_a.length
 
