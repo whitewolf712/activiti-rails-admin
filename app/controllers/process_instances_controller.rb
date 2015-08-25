@@ -10,11 +10,14 @@ class ProcessInstancesController < ApplicationController
     @instances = ProcessInstance.all(id: params[:id], 'includeProcessVariables' => true).to_a
     if @instances.first
       @process_instance = @instances.first
-      history_instance  = HistoryProcessInstance.all('processInstanceId' => @process_instance.id).to_a.first
+      history_instance  = HistoryProcessInstance.all('processInstanceId' => @process_instance.id).data.to_a.first
       @variables        = @process_instance.variables.to_a.sort_by { |h| h[:name].to_s.downcase }
       @jobs             = Job.all('processInstanceId' => @process_instance.id).to_a.sort_by { |h| h[:id].to_i }
       @tasks            = Task.all('processInstanceId' => @process_instance.id).to_a.sort_by { |h| h[:id].to_i }
-      @sub_processes    = HistoryProcessInstance.all('superProcessInstanceId' => @process_instance.id).to_a
+      @sub_processes_params = { superProcessInstanceId: @process_instance.id }
+      # TODO: make constants or config params for 1 and 10
+      @sub_processes_params[:start] = (params[:sub_processes_page].to_i - 1) * 10 if params[:sub_processes_page]
+      @sub_processes    = HistoryProcessInstance.paginate(:all, @sub_processes_params, page: params[:sub_processes_page])
       @super_process_id = history_instance.superProcessInstanceId
       @start_time       = Time.parse(history_instance.startTime)
     else

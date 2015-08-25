@@ -44,4 +44,8 @@ module ProcessInstancesHelper
   def elements_count(elements)
     content_tag :span, elements.to_a.count, class: 'badge'
   end
+
+  def custom_badge(text)
+    content_tag :span, text, class: 'badge'
+  end
 end

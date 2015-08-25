@@ -22,3 +22,10 @@ $(document).on 'page:change page:load', ->
       type: 'ajax'
       margin: [70, 60, 20, 60]
     return
+
+  url = document.location.toString()
+  if url.match('#')
+    panelBody = $('#collapse_' + url.split('#')[1])
+    panelBody.addClass 'in'
+    panelBody.parent().find("span.notification-header").removeClass("collapsed")
+  return

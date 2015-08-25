@@ -2,7 +2,7 @@
   <div class="panel-heading cursor-pointer collapsed" data-toggle="collapse"
        data-target="#collapse_subprocesses" data-parent="#accordion">
     <span class="notification-header collapsed"><strong>Process Subprocesses</strong>
-      <%= elements_count(@sub_processes) %></span>
+      <%= custom_badge(@sub_processes.total_entries) %></span>
   </div>
   <div id="collapse_subprocesses" class="accordion-body collapse">
     <div class="panel-body accordion-inner">
@@ -26,6 +26,7 @@
             <% end %>
             </tbody>
           </table>
+          <div align="center"><%= will_paginate @sub_processes, param_name: 'sub_processes_page', params: {anchor: 'subprocesses'} ,renderer: BootstrapPagination::Rails %></div>
       <% else %>
           <%= no_elements 'Subprocesses' %>
       <% end %>

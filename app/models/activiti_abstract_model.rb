@@ -1,6 +1,11 @@
 class ActivitiAbstractModel < ActiveRestClient::Base
   before_request :prepare_request
 
+  public
+  def arr
+    [1,2,3]
+  end
+
   private
   def prepare_request(name, request)
     user      = session[:api_user].to_s
