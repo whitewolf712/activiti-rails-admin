@@ -3,7 +3,7 @@ class History::ProcessInstancesController < ApplicationController
   include ActivitiRawRequestsHelper
 
   def show
-    @instances = HistoryProcessInstance.all('processInstanceId' => params[:id], 'includeProcessVariables' => true).to_a
+    @instances = HistoryProcessInstance.all('processInstanceId' => params[:id], 'includeProcessVariables' => true).data.to_a
     if @instances.first
       @process_instance = @instances.first
       @variables        = @process_instance.variables.to_a
