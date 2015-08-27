@@ -7,7 +7,10 @@ class History::ProcessInstancesController < ApplicationController
     if @instances.first
       @process_instance = @instances.first
       @variables        = @process_instance.variables.to_a
-      @sub_processes    = HistoryProcessInstance.all('superProcessInstanceId' => @process_instance.id).to_a
+      sub_processes_params = { superProcessInstanceId: @process_instance.id }
+      # TODO: make constants or config params for 1 and 10
+      sub_processes_params[:start] = (params[:sub_processes_page].to_i - 1) * 10 if params[:sub_processes_page]
+      @sub_processes    = HistoryProcessInstance.paginate(:all, sub_processes_params, page: params[:sub_processes_page])
       @super_process_id = @process_instance.superProcessInstanceId
       @start_time       = Time.parse(@process_instance.startTime)
       @end_time         = Time.parse(@process_instance.endTime) if @process_instance.endTime
