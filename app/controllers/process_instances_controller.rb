@@ -1,5 +1,6 @@
 class ProcessInstancesController < ApplicationController
   before_filter :check_authenticate
+  layout false, only: [:diagram_box, :diagram]
   include ActivitiRawRequestsHelper
 
   def index
@@ -37,7 +38,7 @@ class ProcessInstancesController < ApplicationController
 
   def diagram
     url = "#{session[:api_url]}runtime/process-instances/#{params[:id]}/diagram"
-    send_data raw_request(url), type: 'image/png' , disposition: 'inline'
+    send_data raw_request(url), type: 'image/png' , disposition: 'attachment'
   end
 
   def diagram_box

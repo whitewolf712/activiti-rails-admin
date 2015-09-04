@@ -16,12 +16,15 @@ $(document).on 'page:change page:load', ->
   $(".variable-editable").editable ajaxOptions:
     type: "put"
 
+
   $("a.fancybox").on 'click', ->
+    $("#diagramContainer").load @.dataset.url
     $.fancybox
-      href: @.dataset.url
+      content: $("#diagramContainer")
       type: 'ajax'
+      scrolling: 'auto'
       margin: [70, 60, 20, 60]
-    return
+      autoResize: true
 
   url = document.location.toString()
   if url.match('#')
