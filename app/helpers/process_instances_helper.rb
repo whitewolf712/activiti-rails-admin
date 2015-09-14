@@ -54,4 +54,38 @@ module ProcessInstancesHelper
   def custom_badge(text)
     content_tag :span, text, class: 'badge'
   end
+
+  def history_processes_table_tag(process_instances)
+    content_tag :table, class: 'table table-striped table-bordered' do
+      concat history_processes_header
+      process_instances.each do |process_instance|
+        concat history_processes_line process_instance
+      end
+    end
+  end
+
+  def history_processes_header
+    content_tag :thead do
+      concat content_tag :th, 'Id'
+      concat content_tag :th, 'Business key'
+      concat content_tag :th, 'Process definition Id'
+      concat content_tag :th, 'Start time'
+      concat content_tag :th, 'End time'
+    end
+  end
+
+  def history_processes_line(process_instance)
+    content_tag :tr do
+      concat content_tag :td, history_process_link(process_instance)
+      concat content_tag :td, process_instance.businessKey.to_s
+      concat content_tag :td, process_instance.processDefinitionId.to_s
+      concat content_tag :td, process_instance.startTime.to_s
+      concat content_tag :td, process_instance.endTime.to_s
+    end
+  end
+
+  def history_process_link(process_instance)
+    link = link_to process_instance.id, process_instance_path(id: process_instance.id), data: { no_turbolink: true }
+    process_instance.endTime ? link.concat(ended_label_xs_tag) : link
+  end
 end

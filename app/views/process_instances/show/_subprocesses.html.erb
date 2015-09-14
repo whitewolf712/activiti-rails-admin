@@ -7,25 +7,7 @@
   <div id="collapse_subprocesses" class="accordion-body collapse">
     <div class="panel-body accordion-inner">
       <% if @sub_processes.any? %>
-          <table class="table table-striped table-bordered">
-            <thead>
-            <th>Id</th>
-            <th>Business Key</th>
-            <th>Process Definition Id</th>
-            </thead>
-            <tbody>
-            <% @sub_processes.each do |process| %>
-                <tr>
-                  <td>
-                    <%= link_to process.id, process_instance_path(id: process.id), data: { no_turbolink: true } %>
-                    <%= ended_label_xs_tag if process.endTime %>
-                  </td>
-                  <td><%= process.businessKey.to_s %></td>
-                  <td><%= process.processDefinitionId.to_s %></td>
-                </tr>
-            <% end %>
-            </tbody>
-          </table>
+          <%= history_processes_table_tag @sub_processes %>
           <div align="center"><%= will_paginate @sub_processes, param_name: 'sub_processes_page', params: {anchor: 'subprocesses'} ,renderer: BootstrapPagination::Rails %></div>
       <% else %>
           <%= no_elements 'Subprocesses' %>

@@ -1,1 +1,10 @@
-Hello
+<h2>Search parameters</h2>
+<%= bootstrap_form_tag url: process_instances_path, layout: :horizontal, role: 'search', method: :get do |f| %>
+    <%= f.text_field :process_instance_id, value: params[:process_instance_id] %>
+    <%= f.text_field :business_key, value: params[:business_key] %>
+    <%= f.text_field :process_definition_id, value: params[:process_definition_id] %>
+    <div align="center"><%= f.primary 'Search' %></div>
+<% end %>
+<h2>Found process instances</h2>
+<%= history_processes_table_tag @process_instances %>
+<div align="center"><%= will_paginate @process_instances, renderer: BootstrapPagination::Rails %></div>

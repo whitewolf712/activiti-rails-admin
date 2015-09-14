@@ -4,7 +4,11 @@ class ProcessInstancesController < ApplicationController
   include ActivitiRawRequestsHelper
 
   def index
-    @process_instances = ProcessInstance.all
+    search_params = {}
+    search_params['processInstanceId'] = params[:process_instance_id] unless params[:process_instance_id].to_s.empty?
+    search_params['processDefinitionId'] = params[:process_definition_id] unless params[:process_definition_id].to_s.empty?
+    search_params['businessKey'] = params[:business_key] unless params[:business_key].to_s.empty?
+    @process_instances = HistoryProcessInstance.paginate(:all, search_params, page: params[:page])
   end
 
   def show

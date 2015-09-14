@@ -5,12 +5,13 @@ class HistoryProcessInstance < ActivitiAbstractModel
 
   def self.paginate(method_sym, method_options = {}, paginate_options = {})
     method   = self.method(method_sym)
-    result   = method.call method_options
-    page     = paginate_options[:page] || 1
-    # TODO: remove hardcode
-    per_page = 10
-    total    = result.total || result.to_a.length
+    page     = paginate_options[:page] ? paginate_options[:page].to_i : 1
+    per_page = WillPaginate.per_page
 
+    method_options[:start] ||= page * per_page - per_page
+    method_options[:size]  ||= per_page
+    result   = method.call method_options
+    total    = result.total || result.to_a.length
 
     WillPaginate::Collection.create(page, per_page, total) do |pager|
       pager.replace result.data.to_a
