@@ -7,8 +7,10 @@ class ProcessInstancesController < ApplicationController
     search_params = {}
     search_params['processInstanceId'] = params[:process_instance_id] unless params[:process_instance_id].to_s.empty?
     search_params['processDefinitionId'] = params[:process_definition_id] unless params[:process_definition_id].to_s.empty?
+    search_params['processDefinitionKey'] = params[:process_definition_key] unless params[:process_definition_key].to_s.empty?
     search_params['businessKey'] = params[:business_key] unless params[:business_key].to_s.empty?
     @process_instances = HistoryProcessInstance.paginate(:all, search_params, page: params[:page])
+    redirect_to process_instance_path(id:@process_instances.first.id) if @process_instances.total_entries == 1
   end
 
   def show
