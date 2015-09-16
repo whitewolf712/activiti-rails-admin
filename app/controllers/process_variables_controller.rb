@@ -18,12 +18,20 @@ class ProcessVariablesController < ApplicationController
     File::delete(@file.tempfile.path) if File::exists?(@file.tempfile.path)
 
     # TODO: Handle exceptions and unsuccess api responses. Send messages to flash
-    flash[:success] = 'Binary data uploaded succesfully'
+    flash[:success] = 'Binary data uploaded successfully'
     redirect_to process_instance_path(params[:id])
   end
 
   def data
-    url = "#{session[:api_url]}runtime/process-instances/#{params[:id]}/variables/#{params[:name]}/data"
-    send_data raw_request(url), type: 'application/x-java-serialized-object' , disposition: 'inline'
+    @url = "#{session[:api_url]}runtime/process-instances/#{params[:id]}/variables/#{params[:name]}/data"
+    send_data raw_request(@url), type: 'application/x-java-serialized-object' , disposition: 'inline'
+  end
+
+  def delete
+    @url = "#{session[:api_url]}runtime/process-instances/#{params[:id]}/variables/#{params[:name]}"
+    res = raw_delete(@url)
+    # TODO: Handle exceptions and unsuccess api responses. Send messages to flash
+    flash[:success] = 'Variable deleted successfully'
+    redirect_to process_instance_path(params[:id])
   end
 end

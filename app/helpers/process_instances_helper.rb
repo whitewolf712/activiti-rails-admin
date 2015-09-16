@@ -43,6 +43,14 @@ module ProcessInstancesHelper
                   }
   end
 
+  def process_variable_delete_tag(proc_inst_id, name)
+    form_tag delete_process_variable_path(id: proc_inst_id, name: name), method: :delete do
+      button_tag(type: 'submit', class: 'btn btn-default btn-xs', data: { confirm: 'Are you sure?' } ) do
+        content_tag :span, ' Remove', class: 'glyphicon glyphicon-trash'
+      end
+    end
+  end
+
   def process_instance_delete_tag(id)
     form_tag process_instance_path(id: id), method: :delete do
       button_tag(type: 'submit', class: 'btn btn-default btn-lg', data: { confirm: 'Are you sure?' } ) do

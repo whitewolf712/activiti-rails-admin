@@ -12,9 +12,10 @@
             <th>Name</th>
             <th>Type</th>
             <th>Value</th>
+            <th>Actions</th>
             </thead>
             <tbody class="variables_searchable">
-            <tr><td colspan="3">
+            <tr><td colspan="4">
               <div class="input-group" style="width: 100%"><span class="input-group-addon">Filter</span>
                 <input id="variables_filter" type="text" class="form-control" placeholder="Enter search text...">
               </div>
@@ -24,6 +25,7 @@
                   <td><%= variable.name %></td>
                   <td><%= variable.type %></td>
                   <td><%= variable_tag @process_instance, variable %></td>
+                  <td><%= process_variable_delete_tag(@process_instance.id, variable.name)%></td>
                 </tr>
             <% end %>
             </tbody>

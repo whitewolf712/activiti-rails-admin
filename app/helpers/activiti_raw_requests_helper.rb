@@ -10,6 +10,14 @@ module ActivitiRawRequestsHelper
     response.body
   end
 
+  def raw_delete(url)
+    uri = URI(url)
+    connection = Net::HTTP.new uri.host, uri.port
+    request = Net::HTTP::Delete.new uri
+    request.basic_auth session[:api_user], session[:api_password]
+    connection.request request
+  end
+
   def put_binary_variable_data(url, name, type, data)
     uri = URI(url)
     connection = Net::HTTP.new uri.host, uri.port
@@ -23,4 +31,6 @@ module ActivitiRawRequestsHelper
     request.basic_auth session[:api_user], session[:api_password]
     connection.request request
   end
+
+
 end
