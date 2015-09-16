@@ -9,4 +9,18 @@ module ActivitiRawRequestsHelper
 
     response.body
   end
+
+  def put_binary_variable_data(url, name, type, data)
+    uri = URI(url)
+    connection = Net::HTTP.new uri.host, uri.port
+    request = Net::HTTP::Put.new uri
+    form_data = [
+        ['name', name],
+        ['type', type],
+        ['data', data]
+    ]
+    request.set_form form_data, 'multipart/form-data'
+    request.basic_auth session[:api_user], session[:api_password]
+    connection.request request
+  end
 end

@@ -2,15 +2,29 @@ module ProcessInstancesHelper
   def variable_tag(process_instance, variable)
     is_history = !!process_instance.endTime
 
-    if variable.type == 'serializable'
-      return is_history ? history_variable_data_tag(process_instance.id, variable.name) : variable_data_tag(process_instance.id, variable.name)
+    if %w(serializable binary).include? variable.type
+      return is_history ? history_variable_data_tag(process_instance.id, variable.name) :
+          variable_data_tag(process_instance.id, variable.name)
     end
     return variable.value.to_s if is_history
     variable_edit_tag(process_instance.id, variable.name, variable.value)
   end
 
   def variable_data_tag(proc_inst_id, name)
-    link_to 'Get binary data', data_process_variable_path(id: proc_inst_id, name: name)
+    content_tag :div do
+      concat link_to 'Get binary data', data_process_variable_path(id: proc_inst_id, name: name)
+      concat ' | '
+      concat link_to 'Upload binary data', '#', class: 'upload_binary_data_link'
+      concat variable_data_form(proc_inst_id, name)
+    end
+  end
+
+  def variable_data_form(proc_inst_id, name)
+    form_tag update_binary_process_variable_path(id: proc_inst_id, name: name), method: :put, multipart: true do
+      file_field_tag :file,
+                     onchange:'javascript:this.form.submit();',
+                     style: 'display: none;'
+    end
   end
 
   def history_variable_data_tag(proc_inst_id, name)

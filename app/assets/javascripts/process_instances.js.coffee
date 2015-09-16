@@ -26,6 +26,9 @@ $(document).on 'page:change page:load', ->
       margin: [70, 60, 20, 60]
       autoResize: true
 
+  $("a.upload_binary_data_link").on 'click', ->
+    $(@).parent().find('input[type=file]').click()
+
   url = document.location.toString()
   if url.match('#')
     panelBody = $('#collapse_' + url.split('#')[1])

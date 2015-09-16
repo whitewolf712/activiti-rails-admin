@@ -4,9 +4,10 @@ Rails.application.routes.draw do
       get :search
     end
     member do
-      resources :process_variables, only: [:update, :data], param: :name do
+      resources :process_variables, only: [:update, :update_binary, :data], param: :name do
         member do
           get :data
+          put :update_binary
         end
       end
       get :diagram
