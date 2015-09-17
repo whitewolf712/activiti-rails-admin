@@ -25,7 +25,7 @@
                   <td><%= variable.name %></td>
                   <td><%= variable.type %></td>
                   <td><%= variable_tag @process_instance, variable %></td>
-                  <td><%= process_variable_delete_tag(@process_instance.id, variable.name)%></td>
+                  <td><%= process_variable_delete_tag(@process_instance.id, variable.name) unless @process_instance.endTime %></td>
                 </tr>
             <% end %>
             </tbody>
