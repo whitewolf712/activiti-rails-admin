@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_authenticate
+    session[:login_redirect_url] = request.url
     redirect_to new_session_path unless session[:api_url]
   end
 end
