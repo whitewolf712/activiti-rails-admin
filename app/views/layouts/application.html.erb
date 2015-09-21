@@ -13,6 +13,9 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="<%= root_path %>">Activiti Rails Admin</a>
     </div>
+    <ul class="nav navbar-nav">
+      <li><%= link_to  'Process instances', process_instances_path if signed_in? %></li>
+    </ul>
     <ul class="nav navbar-nav navbar-right">
       <%= search_box %>
       <%= profile_urls %>
