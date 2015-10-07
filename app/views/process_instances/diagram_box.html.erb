@@ -1,1 +1,6 @@
 <%= image_tag diagram_process_instance_url, id: :diagramImage %>
+<script type="text/javascript">
+    document.getElementById('diagramImage').addEventListener("load", function() {
+        $.fancybox.update()
+    }, false);
+</script>

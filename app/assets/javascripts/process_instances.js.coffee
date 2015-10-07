@@ -18,12 +18,11 @@ $(document).on 'page:change page:load', ->
 
 
   $("a.fancybox").on 'click', ->
-    $("#diagramContainer").load @.dataset.url
     $.fancybox
-      content: $("#diagramContainer")
+      href: @.dataset.url
       type: 'ajax'
-      scrolling: 'auto'
       margin: [70, 60, 20, 60]
+      scrolling: 'auto'
       autoResize: true
 
   $("a.upload_binary_data_link").on 'click', ->
