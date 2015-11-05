@@ -14,13 +14,14 @@ class ProcessInstancesController < ApplicationController
   end
 
   def show
-    @instances = ProcessInstance.all(id: params[:id], 'includeProcessVariables' => true).to_a
+    @instances = ProcessInstance.all(id: params[:id], 'includeProcessVariables' => true).data.to_a
     if @instances.first
       @process_instance = @instances.first
       history_instance  = HistoryProcessInstance.all('processInstanceId' => @process_instance.id).data.to_a.first
       @variables        = @process_instance.variables.to_a.sort_by { |h| h[:name].to_s.downcase }
-      @jobs             = Job.all('processInstanceId' => @process_instance.id).to_a.sort_by { |h| h[:id].to_i }
-      @tasks            = Task.all('processInstanceId' => @process_instance.id).to_a.sort_by { |h| h[:id].to_i }
+      @jobs             = Job.all('processInstanceId' => @process_instance.id).data.to_a.sort_by { |h| h[:id].to_i }
+      @tasks            = Task.all('processInstanceId' => @process_instance.id).data.to_a.sort_by { |h| h[:id].to_i }
+      @executions       = Execution.all('processInstanceId' => @process_instance.id).data.to_a.sort_by { |h| h[:id].to_i }
       sub_processes_params = { superProcessInstanceId: @process_instance.id }
       # TODO: make constants or config params for 1 and 10
       sub_processes_params[:start] = (params[:sub_processes_page].to_i - 1) * 10 if params[:sub_processes_page]

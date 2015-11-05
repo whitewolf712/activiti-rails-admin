@@ -1,4 +1,4 @@
-<% if @jobs %>
+<% if @tasks %>
     <div class="panel panel-default">
       <div class="panel-heading cursor-pointer collapsed" data-toggle="collapse"
            data-target="#collapse_tasks" data-parent="#accordion">
@@ -10,10 +10,12 @@
           <% if @tasks.any? %>
               <table class="table table-striped table-bordered">
                 <thead>
-                <th>Id</th>
-                <th>Created</th>
-                <th>Name</th>
-                <th>Task Definition Key</th>
+                  <tr>
+                    <th>Id</th>
+                    <th>Created</th>
+                    <th>Name</th>
+                    <th>Task Definition Key</th>
+                  </tr>
                 </thead>
                 <tbody>
                 <% @tasks.each do |task| %>

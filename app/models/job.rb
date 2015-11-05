@@ -1,8 +1,6 @@
 class Job < ActivitiAbstractModel
   before_request :replace_body
 
-  proxy DataProxy
-
   get :all,       '/management/jobs'
   post :execute,  '/management/jobs/:id'
   delete :remove, '/management/jobs/:id'
