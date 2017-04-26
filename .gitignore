@@ -17,3 +17,5 @@
 
 # Ignore config file
 /config/servers.yml
+Будет удалено .idea/
+Будет удалено Gemfile.lock
