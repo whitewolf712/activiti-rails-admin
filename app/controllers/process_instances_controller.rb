@@ -1,3 +1,5 @@
+require 'net/http'
+
 class ProcessInstancesController < ApplicationController
   before_filter :check_authenticate
   layout false, only: [:diagram_box, :diagram]
